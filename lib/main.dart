@@ -1,4 +1,5 @@
-import 'package:counselling_app/views/auth/login.dart';
+import 'package:counselling_app/routing/router.dart';
+import 'package:counselling_app/views/auth/screens/first_onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Montserrat',
       ),
-      home: const Login(),
+      onGenerateRoute: (settings) => generateRoute(settings),
+      home: const FirstOnboardingScreen(),
     );
   }
 }
