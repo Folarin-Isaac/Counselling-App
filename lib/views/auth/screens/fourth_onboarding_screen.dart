@@ -14,13 +14,20 @@ class FourthOnboardingScreen extends StatefulWidget {
 
 class _FourthOnboardingScreenState extends State<FourthOnboardingScreen> {
   bool _isStudent = false;
+  bool _isPicked = false;
 
   bool _setStudentForum() {
-    return _isStudent = true;
+    setState(() {});
+    _isStudent = true;
+    _isPicked = true;
+    return _isStudent && _isPicked;
   }
 
   bool _setCounsellorForum() {
-    return _isStudent = false;
+    setState(() {});
+    _isStudent = false;
+    _isPicked = false;
+    return _isStudent && _isPicked;
   }
 
   Widget navigateToLoginScreen(BuildContext context) {
@@ -41,7 +48,7 @@ class _FourthOnboardingScreenState extends State<FourthOnboardingScreen> {
     return Scaffold(
       backgroundColor: secondBackgroundColor,
       body: Padding(
-        padding: const EdgeInsets.only(left: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -61,23 +68,75 @@ class _FourthOnboardingScreenState extends State<FourthOnboardingScreen> {
             ),
             const SizedBox(height: 55),
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.centerRight,
               child: GestureDetector(
                 onTap: _setStudentForum,
-                child: Image.network('assets/images/student_onboarding_bg.png',
-                height: 150,
-                width: 150,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: _isPicked ? selectedForumColor : Colors.white,
+                        ),
+                      ),
+                      child: Image.asset(
+                        'assets/images/student_onboarding_bg.png',
+                        fit: BoxFit.contain,
+                        height: 150,
+                        width: 150,
+                      ),
+                    ),
+                    const Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: Center(
+                        child: Text(
+                          'Student',
+                          style: AppTextStyle.primary,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
             const SizedBox(height: 20),
-             Align(
-              alignment: Alignment.centerRight,
+            Align(
+              alignment: Alignment.centerLeft,
               child: GestureDetector(
                 onTap: _setCounsellorForum,
-                child: Image.network('assets/images/counsellor_onboarding_bg.png',
-                height: 150,
-                width: 150,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: _isPicked == true
+                              ? Colors.white
+                              : selectedForumColor,
+                        ),
+                      ),
+                      child: Image.asset(
+                        'assets/images/counsellor_onboarding_bg.png',
+                        fit: BoxFit.contain,
+                        height: 150,
+                        width: 150,
+                      ),
+                    ),
+                    const Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: Center(
+                        child: Text(
+                          'Counsellor',
+                          style: AppTextStyle.primary,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
